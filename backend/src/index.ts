@@ -1,32 +1,114 @@
-import { ApolloServer, gql } from "apollo-server-cloud-functions";
+import { ApolloServer, gql, ApolloError, ValidationError } from "apollo-server-cloud-functions";
 
-const serviceAccount = require('../justdoit-service-account.json');
-
-import { Firestore } from '@google-cloud/firestore'
-
-// Create a new client
-
-const initialize: FirebaseFirestore.Settings = {
-  projectId: 'justdoit-301322',
-  keyFilename: serviceAccount,
-}
-
-const firestore = new Firestore(initialize);
+import TagsDto from "./Dtos/TagsDto";
+import TodosDto from './Dtos/TodosDto'
+import UserDto from './Dtos/UserDto'
+import { ITodo } from "./Interfaces/ITodo";
+import TodoRepository from './repository/TodoRepository'
 
 
 // Construct a schema, using GraphQL schema language
+// Defines the shape of data available & a query (Defines the entry points into the api)
+/* 
+Ex: type Query {
+      hello: String
+    }
+*/
+
+console.debug('Writing types')
+
 const typeDefs = gql`
+  # Todos
+
+  type Todo {
+    id: String!
+    completed: Boolean!
+    createdBy: CreatedBy!
+    tags: [Tag]!
+    text: String!
+  }
+
+  # User
+  type User {
+    id: String!
+    userId: String!
+    username: String!
+    email: String!
+  }
+
+  type CreatedBy {
+    id: String!
+    username: String!
+  }
+
+  # Tags
+
+  type Tag {
+    label: String!
+    id: String!
+    todoRefs: [String]! # todo ID
+  }
+
+  # Query (endpoints)
+
   type Query {
-    hello: String
+    user(userId: String!): User
+    todos(completed: Boolean = false): [Todo]
+    todo(id: String!): Todo
+    tags: [Tag]
   }
 `;
 
 // Provide resolver functions for your schema fields
+// Tells how to actually return the data or how to fetch the types above. 
+// Query tells how to fetch the root documents. While anything else explains how to get data that come from a different source (collection).
+
+// Database access here...
+console.info('Writing resolver')
+
 const resolvers = {
-  Query: {
-    hello: () => "Hello world!",
+  Todo: {
+    tags: async (todo: ITodo): Promise<TagsDto[]> => {
+      try {
+        return await TodoRepository.getTagsByTodo(todo.id)
+      } catch (error) {
+        throw new ApolloError(error)
+      }
+    },
   },
+  Query: {
+    user: async (_: any, args: any): Promise<UserDto | ValidationError> => {
+      try {
+        return await TodoRepository.getUser(args.userId) || new ValidationError('User ID not found')
+      } catch (error) {
+        throw new ApolloError(error)
+      }
+    },
+    todos: async (_:any, args:any): Promise<TodosDto[]> => {
+      try {
+        return await TodoRepository.getTodos(args.completed)
+      } catch (error) {
+        throw new ApolloError(error)
+      }
+    },
+    todo: async (_: any, args: any): Promise<TodosDto | undefined> => {
+      try {
+        return await TodoRepository.getTodo(args.id)
+      } catch (error) {
+        throw new ApolloError(error)
+      }
+    },
+    tags: async (): Promise<TagsDto[]> => {
+      try {
+        return await TodoRepository.getTags()
+      } catch (error) {
+        throw new ApolloError(error)
+      }
+    }
+  }
 };
+
+console.info('Defining server')
 
 const server = new ApolloServer({
   typeDefs,
