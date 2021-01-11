@@ -1,0 +1,19 @@
+{
+  "name": "justdoit",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "scripts": {
+    "deploy:api": "tsc && gcloud functions deploy api --runtime nodejs12 --trigger-http",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InceptionCode/JustDoIt.git"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^4.8.1",
+    "@google-cloud/storage": "^5.7.1",
+    "apollo-server-cloud-functions": "^2.19.1",
+    "graphql": "^15.4.0"
+  }
+}
