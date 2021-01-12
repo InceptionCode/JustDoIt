@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const apollo_server_cloud_functions_1 = require("apollo-server-cloud-functions");
 const TodoRepository_1 = tslib_1.__importDefault(require("./repository/TodoRepository"));
+const env = process.env.ENVIRONMENT;
+console.info(`In ${env} environment`);
 // Construct a schema, using GraphQL schema language
 // Defines the shape of data available & a query (Defines the entry points into the api)
 /*
@@ -10,7 +12,7 @@ Ex: type Query {
       hello: String
     }
 */
-console.debug('Writing types');
+console.info('Writing types');
 const typeDefs = apollo_server_cloud_functions_1.gql `
   # Todos
 
@@ -61,7 +63,6 @@ const resolvers = {
     Todo: {
         tags: async (todo) => {
             try {
-                console.log(todo);
                 return await TodoRepository_1.default.getTagsByTodo(todo.id);
             }
             catch (error) {
@@ -108,8 +109,8 @@ console.info('Defining server');
 const server = new apollo_server_cloud_functions_1.ApolloServer({
     typeDefs,
     resolvers,
-    playground: true,
-    introspection: true,
+    playground: env === "dev",
+    introspection: env === "dev",
     context: ({ req, res }) => ({
         headers: req.headers,
         req,

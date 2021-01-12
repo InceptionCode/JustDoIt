@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "scripts": {
-    "deploy:api": "tsc && gcloud functions deploy api --runtime nodejs12 --trigger-http",
+    "deploy:devapi": "tsc && gcloud functions deploy api --runtime nodejs12 --env-vars-file .env.yaml --trigger-http",
+    "deploy:prodapi": "tsc && gcloud functions deploy api --runtime nodejs12 --update-env-vars ENVIRONMENT=prod --trigger-http",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

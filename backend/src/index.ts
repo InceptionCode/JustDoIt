@@ -6,7 +6,10 @@ import UserDto from './Dtos/UserDto'
 import { ITodo } from "./Interfaces/ITodo";
 import TodoRepository from './repository/TodoRepository'
 
+import environment from './types/EnvTypes'
+const env: environment = process.env.ENVIRONMENT as environment
 
+console.info(`In ${env} environment`)
 // Construct a schema, using GraphQL schema language
 // Defines the shape of data available & a query (Defines the entry points into the api)
 /* 
@@ -15,7 +18,7 @@ Ex: type Query {
     }
 */
 
-console.debug('Writing types')
+console.info('Writing types')
 
 const typeDefs = gql`
   # Todos
@@ -113,8 +116,8 @@ console.info('Defining server')
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: true,
-  introspection: true,
+  playground: env === "dev",
+  introspection: env === "dev",
   context: ({ req, res }) => ({
     headers: req.headers,
     req,

@@ -106,3 +106,4 @@ dist
 
 # Backend
 justdoit-service-account.json
+.env.yaml
