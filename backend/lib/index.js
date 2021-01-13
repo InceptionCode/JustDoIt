@@ -117,5 +117,7 @@ const server = new apollo_server_cloud_functions_1.ApolloServer({
         res,
     }),
 });
-exports.api = server.createHandler();
+exports.api = server.createHandler({
+    cors: { origin: '*', credentials: true }
+});
 //# sourceMappingURL=index.js.map

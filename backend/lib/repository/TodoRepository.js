@@ -5,7 +5,7 @@ const firestore_1 = require("@google-cloud/firestore");
 const firestore = new firestore_1.Firestore();
 const env = process.env.ENVIRONMENT;
 const baseUrl = `${env}api/routes`;
-console.debug("Base URL", baseUrl);
+console.info("Base URL", baseUrl);
 const TodoRepository = {
     getUser: async (userId) => {
         const user = await firestore.doc(`${baseUrl}/users/${userId}`).get();
