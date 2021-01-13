@@ -21,7 +21,6 @@
     "@angular/router": "~11.0.6",
     "@apollo/client": "^3.0.0",
     "apollo-angular": "^2.2.0",
-    "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
