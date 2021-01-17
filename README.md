@@ -1,2 +1,3 @@
 # JustDoIt
-Todo App built in Angular. Fun side project to learn Angular, Graphql &amp; servless.
+
+Todo App built in Svelte. Fun side project to learn Svelte, Snowpack, Graphql &amp; Google Cloud Functions.

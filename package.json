@@ -1,7 +1,7 @@
 {
   "name": "justdoit",
   "version": "1.0.0",
-  "description": "Angular project for fun and learning",
+  "description": "Sveltecd  project for fun and learning",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/InceptionCode/JustDoIt.git"
   },
   "keywords": [
-    "Angular",
+    "Svelte",
     "Javascript",
     "Graphql"
   ],
@@ -21,7 +21,5 @@
     "url": "https://github.com/InceptionCode/JustDoIt/issues"
   },
   "homepage": "https://github.com/InceptionCode/JustDoIt#readme",
-  "dependencies": {
-    "@angular/cli": "^11.0.6"
-  }
+  "dependencies": {}
 }
