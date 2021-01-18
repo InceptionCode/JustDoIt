@@ -1,9 +1,9 @@
 import environment from '../types/EnvTypes'
 
-import ITodoRepository from '../Interfaces/ITodoRepository'
-import UserDto from '../Dtos/UserDto'
-import TagsDto from '../Dtos/TagsDto'
-import TodosDto from '../Dtos/TodosDto'
+import ITodoRepository from '../../../common/Interfaces/ITodoRepository'
+import UserDto from '../../../common/Dtos/UserDto'
+import TagsDto from '../../../common/Dtos/TagsDto'
+import TodosDto from '../../../common/Dtos/TodosDto'
 
 import { Firestore, QuerySnapshot, DocumentSnapshot } from '@google-cloud/firestore'
 // Create a new client

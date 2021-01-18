@@ -1,9 +1,9 @@
 import { ApolloServer, gql, ApolloError, ValidationError } from "apollo-server-cloud-functions";
 
-import TagsDto from "./Dtos/TagsDto";
-import TodosDto from './Dtos/TodosDto'
-import UserDto from './Dtos/UserDto'
-import { ITodo } from "./Interfaces/ITodo";
+import TagsDto from "../../common/Dtos/TagsDto";
+import TodosDto from '../../common/Dtos/TodosDto'
+import UserDto from '../../common/Dtos/UserDto'
+import { ITodo } from "../../common/Interfaces/ITodo";
 import TodoRepository from './repository/TodoRepository'
 
 import environment from './types/EnvTypes'
