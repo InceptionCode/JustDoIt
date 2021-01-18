@@ -3,14 +3,9 @@
   import { createHttpLink } from "apollo-link-http"
   import { setClient } from "svelte-apollo"
 
-  import { setContext } from "svelte"
-  import { writable } from "svelte/store"
-
   import firebase from "firebase"
 
   import Login from "./Login.svelte"
-
-  import type IUser from "../../common/Interfaces/IUser"
 
   const { env } = import.meta
   const firebaseConfig = {
@@ -25,16 +20,11 @@
     link: createHttpLink({ uri: env.SNOWPACK_PUBLIC_API }),
   })
 
-  const initialUserData: IUser = {}
-  const userData = writable(initialUserData)
-
-  setContext("userData", userData)
   setClient(client)
   firebase.initializeApp(firebaseConfig)
 </script>
 
 <div class="App">
-  Landing Page
   <Login />
 </div>
 
