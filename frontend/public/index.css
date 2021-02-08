@@ -1,4 +1,75 @@
 /* Add CSS styles here! */
 body {
-  font-family: sans-serif;
+  font-family: Helvetica, sans-serif;
+  width: 1200px;
+  margin: 10px auto;
+}
+
+#title {
+  text-decoration: underline wavy;
+}
+
+h1,
+h2 {
+  text-align: center !important;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 20px;
+}
+
+h1#title {
+  width: 200px;
+  margin: 30px auto;
+}
+button.app-btn {
+  direction: ltr;
+  font-weight: 500;
+  height: auto;
+  line-height: normal;
+  max-width: 220px;
+  min-height: 40px;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+/* Helper Class */
+.firebaseui-id-page-sign-in,
+.firebaseui-id-page-password-sign-in {
+  top: 45px;
+  left: 120px;
+}
+.transparent {
+  background: none !important;
+}
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.overlay > i {
+  color: white;
+  position: absolute;
+  top: 25px;
+  right: 50px;
+}
+.overlay > i:hover {
+  cursor: pointer;
+}
+.spinner-container-center {
+  display: flex;
+  justify-content: center;
+}
+/* Attributes */
+:disabled {
+  cursor: not-allowed !important;
 }

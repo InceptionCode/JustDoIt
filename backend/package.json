@@ -1,10 +1,12 @@
 {
   "name": "justdoit",
   "version": "1.0.0",
-  "main": "lib/index.js",
+  "main": "lib/backend/src/index.js",
   "scripts": {
+    "serve": "tsc && ENVIRONMENT=dev node lib/backend/src/index.js",
     "deploy:devapi": "tsc && gcloud functions deploy api --runtime nodejs12 --env-vars-file .env.yaml --trigger-http",
     "deploy:prodapi": "tsc && gcloud functions deploy api --runtime nodejs12 --update-env-vars ENVIRONMENT=prod --trigger-http",
+    "deleteApi": "tsc && gcloud functions delete api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,8 +15,15 @@
   },
   "dependencies": {
     "@google-cloud/firestore": "^4.8.1",
-    "@google-cloud/storage": "^5.7.1",
-    "apollo-server-cloud-functions": "^2.19.1",
-    "graphql": "^15.4.0"
-  }
+    "@types/ws": "^7.4.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.13.1",
+    "graphql": "^15.4.0",
+    "graphql-tools": "^7.0.2"
+  },
+  "devDependencies": {}
 }
